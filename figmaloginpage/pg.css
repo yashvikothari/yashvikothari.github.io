@@ -1,0 +1,44 @@
+body{
+    background-color: #244BC5;
+    background-image: url("/figmaloginpage/image/BG.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+::placeholder{
+ color: rgb(255, 255, 255);   
+}
+.inputWrapper {
+    width: 300px;
+
+}
+.inputWrapper input,
+.inputWrapper button {
+    width: 100%;
+    height: 45px;
+    /* border:0; */
+    box-sizing: border-box;
+}
+.inputWrapper input:focus-visible {
+    outline: 0px !important;
+  
+}
+
+.inputWrapper input{
+    margin-bottom:20px;
+    border: 1px solid #FFFFFF;
+    background-color: transparent;
+    border-radius: 4px;
+    color:white;
+
+}
+.inputWrapper button{
+    margin-top:23 ;
+    border-radius: 4px;
+}
+/* flexbox use kem karvanu and kI RITE KARVANU, FLEXBOX EASY THEN GRID */
+.loginInner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+}
