@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man - Flexible Navigation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        .game-container {
+            border: 3px solid #00f;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            gap: 30px;
+        }
+        .score-item {
+            background: rgba(0,0,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 100px;
+        }
+        #gameCanvas {
+            border: 2px solid #fff;
+            background: #000;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            background: #00f;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .controls button:hover:not(:disabled) {
+            background: #44f;
+        }
+        .controls button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            background: #333;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .movement-info {
+            background: rgba(0,255,0,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🟡 PAC-MAN (Flexible Navigation)</h1>
+        
+        <div class="game-header">
+            <div class="score-item">
+                <div>Score</div>
+                <div id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div>Lives</div>
+                <div id="lives">3</div>
+            </div>
+            <div class="score-item">
+                <div>Level</div>
+                <div id="level">1</div>
+            </div>
+            <div class="score-item">
+                <div>Status</div>
+                <div id="status">Ready</div>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        
+        <div class="movement-info">
+            <strong>Enhanced Navigation:</strong> Smooth movement, input buffering, corner assistance, variable speed
+        </div>
+        
+        <div class="status" id="gameInfo">
+            Use Arrow Keys or WASD for flexible movement. Try rapid direction changes!
+        </div>
+        
+        <div class="controls">
+            <button id="startBtn">Start Game</button>
+            <button id="pauseBtn" disabled>Pause</button>
+            <button id="resetBtn">Reset</button>
+            <button id="speedBtn">Normal Speed</button>
+        </div>
+    </div>
+    
+    <script>
+        // Game variables
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const livesElement = document.getElementById('lives');
+        const levelElement = document.getElementById('level');
+        const statusElement = document.getElementById('status');
+        const gameInfoElement = document.getElementById('gameInfo');
+        
+        // Enhanced game state
+        let gameState = {
+            score: 0,
+            lives: 3,
+            level: 1,
+            gameRunning: false,
+            gamePaused: false,
+            gameOver: false,
+            speedMode: 'normal' // normal, fast, turbo
+        };
+        
+        // Movement constants
+        const GRID_SIZE = 20;
+        const COLS = Math.floor(canvas.width / GRID_SIZE);
+        const ROWS = Math.floor(canvas.height / GRID_SIZE);
+        
+        // Flexible movement settings
+        const MOVEMENT_SPEEDS = {
+            normal: 2,
+            fast: 4,
+            turbo: 6
+        };
+        
+        const CORNER_TOLERANCE = 8; // Pixels for corner cutting assistance
+        const INPUT_BUFFER_SIZE = 3; // Number of inputs to buffer
+        const DIRECTION_CHANGE_SMOOTHNESS = 0.8; // Smooth direction transitions
+        
+        // Simple maze
+        const maze = [];
+        for (let row = 0; row < ROWS; row++) {
+            maze[row] = [];
+            for (let col = 0; col < COLS; col++) {
+                if (row === 0 || row === ROWS-1 || col === 0 || col === COLS-1) {
+                    maze[row][col] = 1; // Wall
+                } else if (Math.random() < 0.08) {
+                    maze[row][col] = 1; // Random walls
+                } else if (Math.random() < 0.03) {
+                    maze[row][col] = 2; // Power pellet
+                } else {
+                    maze[row][col] = 0; // Dot
+                }
+            }
+        }
+        
+        // Enhanced Pac-Man with flexible movement
+        let pacman = {
+            // Position (pixel-based for smooth movement)
+            x: 2.5 * GRID_SIZE,
+            y: 2.5 * GRID_SIZE,
+            
+            // Movement
+            direction: 'right',
+            nextDirection: 'right',
+            velocity: { x: 0, y: 0 },
+            speed: MOVEMENT_SPEEDS.normal,
+            
+            // Input buffering for responsive controls
+            inputBuffer: [],
+            lastInputTime: 0,
+            
+            // Animation
+            animFrame: 0,
+            mouthOpen: true,
+            
+            // Corner assistance
+            cornerAssist: true,
+            
+            // Movement state
+            isMoving: false,
+            canChangeDirection: true
+        };
+        
+        // Enhanced input system
+        const inputSystem = {
+            keys: {},
+            keyPressed: {},
+            
+            update() {
+                // Clear pressed keys after processing
+                this.keyPressed = {};
+            },
+            
+            isKeyDown(key) {
+                return this.keys[key] || false;
+            },
+            
+            wasKeyPressed(key) {
+                return this.keyPressed[key] || false;
+            },
+            
+            addToBuffer(direction) {
+                const currentTime = Date.now();
+                
+                // Add to input buffer with timestamp
+                pacman.inputBuffer.push({
+                    direction: direction,
+                    timestamp: currentTime
+                });
+                
+                // Keep buffer size manageable
+                if (pacman.inputBuffer.length > INPUT_BUFFER_SIZE) {
+                    pacman.inputBuffer.shift();
+                }
+                
+                // Try to process immediately
+                this.processInputBuffer();
+            },
+            
+            processInputBuffer() {
+                if (pacman.inputBuffer.length === 0) return;
+                
+                // Try each buffered input
+                for (let i = 0; i < pacman.inputBuffer.length; i++) {
+                    const input = pacman.inputBuffer[i];
+                    
+                    if (this.canMoveTo(input.direction)) {
+                        pacman.nextDirection = input.direction;
+                        pacman.inputBuffer = []; // Clear buffer on successful direction change
+                        return;
+                    }
+                }
+                
+                // Remove old inputs (older than 500ms)
+                const currentTime = Date.now();
+                pacman.inputBuffer = pacman.inputBuffer.filter(
+                    input => currentTime - input.timestamp < 500
+                );
+            },
+            
+            canMoveTo(direction) {
+                const testPos = this.getNextPosition(pacman.x, pacman.y, direction, pacman.speed);
+                return this.isValidPosition(testPos.x, testPos.y, direction);
+            },
+            
+            getNextPosition(x, y, direction, speed) {
+                let newX = x;
+                let newY = y;
+                
+                switch (direction) {
+                    case 'up': newY -= speed; break;
+                    case 'down': newY += speed; break;
+                    case 'left': newX -= speed; break;
+                    case 'right': newX += speed; break;
+                }
+                
+                return { x: newX, y: newY };
+            },
+            
+            isValidPosition(x, y, direction) {
+                // Convert pixel position to grid
+                const gridX = Math.floor(x / GRID_SIZE);
+                const gridY = Math.floor(y / GRID_SIZE);
+                
+                // Check bounds
+                if (gridX < 0 || gridX >= COLS || gridY < 0 || gridY >= ROWS) {
+                    return false;
+                }
+                
+                // Check wall collision
+                if (maze[gridY][gridX] === 1) {
+                    return false;
+                }
+                
+                // Corner assistance - check if we're close enough to a valid path
+                if (pacman.cornerAssist) {
+                    return this.checkCornerAssistance(x, y, direction);
+                }
+                
+                return true;
+            },
+            
+            checkCornerAssistance(x, y, direction) {
+                // Allow slight position adjustments for easier navigation
+                const centerX = x + GRID_SIZE / 2;
+                const centerY = y + GRID_SIZE / 2;
+                
+                const gridCenterX = Math.floor(centerX / GRID_SIZE) * GRID_SIZE + GRID_SIZE / 2;
+                const gridCenterY = Math.floor(centerY / GRID_SIZE) * GRID_SIZE + GRID_SIZE / 2;
+                
+                const offsetX = Math.abs(centerX - gridCenterX);
+                const offsetY = Math.abs(centerY - gridCenterY);
+                
+                // If we're close to grid center, allow movement
+                if ((direction === 'up' || direction === 'down') && offsetX < CORNER_TOLERANCE) {
+                    return true;
+                }
+                if ((direction === 'left' || direction === 'right') && offsetY < CORNER_TOLERANCE) {
+                    return true;
+                }
+                
+                return true; // Default allow for smooth movement
+            }
+        };
+        
+        // Game functions
+        function updateUI() {
+            scoreElement.textContent = gameState.score;
+            livesElement.textContent = gameState.lives;
+            levelElement.textContent = gameState.level;
+            
+            if (gameState.gameOver) {
+                statusElement.textContent = 'Game Over';
+                statusElement.style.color = '#f00';
+            } else if (!gameState.gameRunning) {
+                statusElement.textContent = 'Ready';
+                statusElement.style.color = '#fff';
+            } else if (gameState.gamePaused) {
+                statusElement.textContent = 'Paused';
+                statusElement.style.color = '#ff0';
+            } else {
+                statusElement.textContent = 'Playing';
+                statusElement.style.color = '#0f0';
+            }
+            
+            // Update buttons
+            const startBtn = document.getElementById('startBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const speedBtn = document.getElementById('speedBtn');
+            
+            if (gameState.gameOver) {
+                startBtn.textContent = 'New Game';
+                pauseBtn.disabled = true;
+            } else if (gameState.gameRunning) {
+                startBtn.textContent = 'Restart';
+                pauseBtn.disabled = false;
+                pauseBtn.textContent = gameState.gamePaused ? 'Resume' : 'Pause';
+            } else {
+                startBtn.textContent = 'Start Game';
+                pauseBtn.disabled = true;
+            }
+            
+            speedBtn.textContent = `${gameState.speedMode.charAt(0).toUpperCase() + gameState.speedMode.slice(1)} Speed`;
+        }
+        
+        function startGame() {
+            gameState.gameRunning = true;
+            gameState.gamePaused = false;
+            gameState.gameOver = false;
+            
+            if (gameState.lives <= 0) {
+                // New game
+                gameState.score = 0;
+                gameState.lives = 3;
+                gameState.level = 1;
+                pacman.x = 2.5 * GRID_SIZE;
+                pacman.y = 2.5 * GRID_SIZE;
+            }
+            
+            updateUI();
+            gameInfoElement.textContent = 'Game started! Try rapid direction changes - movement is now flexible!';
+            gameLoop();
+        }
+        
+        function togglePause() {
+            if (!gameState.gameRunning || gameState.gameOver) return;
+            
+            gameState.gamePaused = !gameState.gamePaused;
+            updateUI();
+            
+            if (gameState.gamePaused) {
+                gameInfoElement.textContent = 'Game paused. Movement buffer preserved.';
+            } else {
+                gameInfoElement.textContent = 'Game resumed! Flexible navigation active.';
+                gameLoop();
+            }
+        }
+        
+        function toggleSpeed() {
+            const speeds = ['normal', 'fast', 'turbo'];
+            const currentIndex = speeds.indexOf(gameState.speedMode);
+            const nextIndex = (currentIndex + 1) % speeds.length;
+            gameState.speedMode = speeds[nextIndex];
+            
+            pacman.speed = MOVEMENT_SPEEDS[gameState.speedMode];
+            updateUI();
+            gameInfoElement.textContent = `Speed changed to ${gameState.speedMode}! Try the enhanced movement.`;
+        }
+        
+        function resetGame() {
+            gameState.gameRunning = false;
+            gameState.gamePaused = false;
+            gameState.gameOver = false;
+            gameState.score = 0;
+            gameState.lives = 3;
+            gameState.level = 1;
+            
+            pacman.x = 2.5 * GRID_SIZE;
+            pacman.y = 2.5 * GRID_SIZE;
+            pacman.direction = 'right';
+            pacman.nextDirection = 'right';
+            pacman.velocity = { x: 0, y: 0 };
+            pacman.inputBuffer = [];
+            
+            updateUI();
+            draw();
+            gameInfoElement.textContent = 'Game reset. Ready for flexible navigation!';
+        }
+        
+        function gameLoop() {
+            if (!gameState.gameRunning || gameState.gamePaused || gameState.gameOver) return;
+            
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function update() {
+            // Process input buffer
+            inputSystem.processInputBuffer();
+            
+            // Update Pac-Man movement
+            updatePacmanMovement();
+            
+            // Check collisions
+            checkCollisions();
+            
+            // Update input system
+            inputSystem.update();
+            
+            updateUI();
+        }
+        
+        function updatePacmanMovement() {
+            pacman.animFrame++;
+            
+            // Smooth direction changes
+            if (pacman.nextDirection !== pacman.direction) {
+                if (inputSystem.canMoveTo(pacman.nextDirection)) {
+                    pacman.direction = pacman.nextDirection;
+                    
+                    // Smooth position adjustment for corner assistance
+                    if (pacman.cornerAssist) {
+                        adjustPositionForDirection();
+                    }
+                }
+            }
+            
+            // Calculate velocity based on direction
+            pacman.velocity = { x: 0, y: 0 };
+            switch (pacman.direction) {
+                case 'up': pacman.velocity.y = -pacman.speed; break;
+                case 'down': pacman.velocity.y = pacman.speed; break;
+                case 'left': pacman.velocity.x = -pacman.speed; break;
+                case 'right': pacman.velocity.x = pacman.speed; break;
+            }
+            
+            // Apply movement with collision checking
+            const newX = pacman.x + pacman.velocity.x;
+            const newY = pacman.y + pacman.velocity.y;
+            
+            if (inputSystem.isValidPosition(newX, newY, pacman.direction)) {
+                pacman.x = newX;
+                pacman.y = newY;
+                pacman.isMoving = true;
+            } else {
+                pacman.isMoving = false;
+            }
+            
+            // Wrap around screen edges
+            if (pacman.x < 0) pacman.x = canvas.width - GRID_SIZE;
+            if (pacman.x >= canvas.width) pacman.x = 0;
+            
+            // Update mouth animation
+            if (pacman.isMoving && pacman.animFrame % 8 === 0) {
+                pacman.mouthOpen = !pacman.mouthOpen;
+            }
+        }
+        
+        function adjustPositionForDirection() {
+            // Snap to grid center when changing direction for smoother navigation
+            const centerX = pacman.x + GRID_SIZE / 2;
+            const centerY = pacman.y + GRID_SIZE / 2;
+            
+            const gridCenterX = Math.floor(centerX / GRID_SIZE) * GRID_SIZE + GRID_SIZE / 2;
+            const gridCenterY = Math.floor(centerY / GRID_SIZE) * GRID_SIZE + GRID_SIZE / 2;
+            
+            // Gradual adjustment instead of instant snap
+            const adjustSpeed = 0.3;
+            
+            if (pacman.direction === 'up' || pacman.direction === 'down') {
+                const diff = gridCenterX - (pacman.x + GRID_SIZE / 2);
+                pacman.x += diff * adjustSpeed;
+            } else {
+                const diff = gridCenterY - (pacman.y + GRID_SIZE / 2);
+                pacman.y += diff * adjustSpeed;
+            }
+        }
+        
+        function checkCollisions() {
+            const gridX = Math.floor((pacman.x + GRID_SIZE/2) / GRID_SIZE);
+            const gridY = Math.floor((pacman.y + GRID_SIZE/2) / GRID_SIZE);
+            
+            if (gridX >= 0 && gridX < COLS && gridY >= 0 && gridY < ROWS) {
+                const currentCell = maze[gridY][gridX];
+                
+                if (currentCell === 0) { // Dot
+                    gameState.score += 10;
+                    maze[gridY][gridX] = -1; // Eaten
+                    gameInfoElement.textContent = `Score: ${gameState.score} - Smooth navigation working!`;
+                } else if (currentCell === 2) { // Power pellet
+                    gameState.score += 50;
+                    maze[gridY][gridX] = -1; // Eaten
+                    gameInfoElement.textContent = `Power pellet! +50 points! Score: ${gameState.score}`;
+                }
+            }
+        }
+        
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw maze
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    const x = col * GRID_SIZE;
+                    const y = row * GRID_SIZE;
+                    
+                    switch (maze[row][col]) {
+                        case 1: // Wall
+                            ctx.fillStyle = '#00f';
+                            ctx.fillRect(x, y, GRID_SIZE, GRID_SIZE);
+                            break;
+                        case 0: // Dot
+                            ctx.fillStyle = '#fff';
+                            ctx.beginPath();
+                            ctx.arc(x + GRID_SIZE/2, y + GRID_SIZE/2, 2, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                        case 2: // Power pellet
+                            ctx.fillStyle = '#fff';
+                            ctx.beginPath();
+                            ctx.arc(x + GRID_SIZE/2, y + GRID_SIZE/2, 6, 0, Math.PI * 2);
+                            ctx.fill();
+                            break;
+                    }
+                }
+            }
+            
+            // Draw Pac-Man with smooth positioning
+            const pacX = pacman.x + GRID_SIZE/2;
+            const pacY = pacman.y + GRID_SIZE/2;
+            
+            ctx.fillStyle = '#ff0';
+            ctx.beginPath();
+            
+            // Enhanced animated mouth
+            if (pacman.mouthOpen && pacman.isMoving) {
+                let startAngle = 0;
+                let endAngle = Math.PI * 2;
+                
+                switch (pacman.direction) {
+                    case 'right':
+                        startAngle = Math.PI * 0.2;
+                        endAngle = Math.PI * 1.8;
+                        break;
+                    case 'left':
+                        startAngle = Math.PI * 1.2;
+                        endAngle = Math.PI * 0.8;
+                        break;
+                    case 'up':
+                        startAngle = Math.PI * 1.7;
+                        endAngle = Math.PI * 1.3;
+                        break;
+                    case 'down':
+                        startAngle = Math.PI * 0.7;
+                        endAngle = Math.PI * 0.3;
+                        break;
+                }
+                
+                ctx.arc(pacX, pacY, GRID_SIZE/2 - 2, startAngle, endAngle);
+                ctx.lineTo(pacX, pacY);
+            } else {
+                ctx.arc(pacX, pacY, GRID_SIZE/2 - 2, 0, Math.PI * 2);
+            }
+            ctx.fill();
+            
+            // Draw movement trail for visual feedback
+            if (pacman.isMoving) {
+                ctx.fillStyle = 'rgba(255, 255, 0, 0.3)';
+                ctx.beginPath();
+                ctx.arc(pacX, pacY, GRID_SIZE/2 + 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        // Enhanced event listeners
+        document.addEventListener('keydown', (e) => {
+            inputSystem.keys[e.code] = true;
+            inputSystem.keyPressed[e.code] = true;
+            
+            if (!gameState.gameRunning || gameState.gamePaused) return;
+            
+            let direction = null;
+            switch (e.code) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    direction = 'up';
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    direction = 'down';
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    direction = 'left';
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    direction = 'right';
+                    break;
+                case 'Space':
+                    e.preventDefault();
+                    togglePause();
+                    return;
+            }
+            
+            if (direction) {
+                e.preventDefault();
+                inputSystem.addToBuffer(direction);
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            inputSystem.keys[e.code] = false;
+        });
+        
+        // Button event listeners
+        document.getElementById('startBtn').addEventListener('click', startGame);
+        document.getElementById('pauseBtn').addEventListener('click', togglePause);
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+        document.getElementById('speedBtn').addEventListener('click', toggleSpeed);
+        
+        // Initialize
+        updateUI();
+        draw();
+        
+        console.log('Flexible Navigation Pac-Man loaded!');
+        console.log('Features: Smooth movement, input buffering, corner assistance, variable speed');
+    </script>
+</body>
+</html>
