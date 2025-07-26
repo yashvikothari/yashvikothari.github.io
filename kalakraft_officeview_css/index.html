@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />D:\1yashvi\github\yashvikothari.github.io\kalakraft_officeview_css
+		<title>
+			KalaKraft Digital mycrxn Den by Yashvi Kothari - Interactive CSS Workspace
+		</title>
+		<meta
+			name="description"
+			content="A CSS-only interactive office workspace featuring four creative pods and shared lounge with fun-work culture elements"
+		/>
+		<meta
+			name="keywords"
+			content="CSS workspace, interactive design, office culture, creative pods, accessibility"
+		/>
+		<meta name="author" content="Yashvi Kothari" />
+
+		<!-- Google Fonts for Enhanced Typography -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="style.css" />
+
+		<!-- Accessibility and SEO Meta Tags -->
+		<meta name="theme-color" content="#FF8255" />
+		<meta
+			property="og:title"
+			content="KalaKraft Digital Den - Interactive CSS Workspace"
+		/>
+		<meta
+			property="og:description"
+			content="Experience a beautiful CSS-only office workspace with interactive elements and cultural touches"
+		/>
+		<meta property="og:type" content="website" />
+
+		<!-- Structured Data for SEO -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebApplication",
+				"name": "KalaKraft Digital Den",
+				"description": "Interactive CSS-only office workspace",
+				"author": {
+					"@type": "Person",
+					"name": "Yashvi Kothari"
+				},
+				"applicationCategory": "DesignApplication"
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Skip Navigation for Screen Readers -->
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+
+		<!-- Landing Scene with Enhanced Reception -->
+		<section id="landing" class="landing-scene" role="banner">
+			<div class="office-floorplan">
+				<!-- mycrxn Style Reception -->
+				<div class="reception-area">
+					<div class="brass-nameplate">
+						<div class="nameplate-text">KalaKraft Digital Den</div>
+						<div class="nameplate-subtitle">
+							Where Creativity Meets Technology
+						</div>
+					</div>
+					<div class="marigold-garland" aria-hidden="true"></div>
+					<div class="receptionist">
+						<div class="receptionist-desk"></div>
+						<div
+							class="receptionist-figure"
+							aria-label="Friendly receptionist"
+						></div>
+					</div>
+				</div>
+
+				<!-- Traditional Elements -->
+				<div
+					class="plant plant-left"
+					aria-label="Office plant decoration"
+				></div>
+				<div
+					class="plant plant-right"
+					aria-label="Office plant decoration"
+				></div>
+
+				<!-- Welcome Section -->
+				<div class="welcome-banner">
+					<h1>Welcome to KalaKraft!</h1>
+					<div class="hindi-welcome" aria-label="Welcome in Hindi">
+						by Yashvi Kothari 
+					</div>
+				</div>
+				<div class="tagline">
+					A dream space where art, code, creativity & security works
+				</div>
+
+				<!-- Enhanced Enter Button -->
+				<a
+					href="#main-dashboard"
+					class="enter-button"
+					role="button"
+					aria-describedby="enter-description"
+				>
+					<span class="button-text">Enter the Digital Den</span>
+					<span class="button-icon" aria-hidden="true">→</span>
+				</a>
+				<div id="enter-description" class="sr-only">
+					Navigate to the main workspace with four creative pods
+				</div>
+			</div>
+
+			<!-- Ambient Background Elements -->
+			<div class="floating-elements" aria-hidden="true">
+				<div class="floating-element element-1"></div>
+				<div class="floating-element element-2"></div>
+				<div class="floating-element element-3"></div>
+			</div>
+		</section>
+
+		<!-- Main Dashboard -->
+		<main id="main-dashboard" class="main-dashboard" role="main">
+			<div id="main-content">
+				<!-- Enhanced Navigation -->
+				<nav
+					class="back-navigation"
+					role="navigation"
+					aria-label="Main navigation"
+				>
+					<a href="#landing" class="back-button" role="button">
+						<span class="back-icon" aria-hidden="true">←</span>
+						<span>Back to Landing</span>
+					</a>
+					<div class="nav-breadcrumb" aria-label="Current location">
+						Digital Den Workspace
+					</div>
+				</nav>
+
+				<div class="dashboard-grid">
+					<!-- Pod 1: @tadkafy Inspiration Pod with Enhanced Chai Station -->
+					<section
+						class="pod tadkafy-pod"
+						aria-labelledby="tadkafy-title"
+						role="region"
+					>
+						<header>
+							<h2 id="tadkafy-title" class="pod-title">
+								@tadkafy Inspiration Pod
+							</h2>
+							<div class="pod-subtitle">
+								Brewing Creativity with Every Sip
+							</div>
+						</header>
+						<div class="pod-content">
+							<!-- Enhanced Chai Station -->
+							<div
+								class="chai-station"
+								role="button"
+								tabindex="0"
+								aria-label="Interactive chai brewing station"
+							>
+								<div class="chai-pot">
+									<div class="pot-body"></div>
+									<div class="pot-handle"></div>
+									<div
+										class="chai-steam"
+										aria-hidden="true"
+									></div>
+								</div>
+								<div class="brass-tray">
+									<div class="chai-cup cup-1"></div>
+									<div class="chai-cup cup-2"></div>
+								</div>
+								<div
+									class="brewing-indicator"
+									aria-live="polite"
+								>
+									<span class="brewing-text">Brewing...</span>
+								</div>
+							</div>
+
+							<!-- Traditional Spice Shelf -->
+							<div class="spice-shelf">
+								<div
+									class="spice-jar"
+									data-spice="cardamom"
+								></div>
+								<div
+									class="spice-jar"
+									data-spice="ginger"
+								></div>
+								<div
+									class="spice-jar"
+									data-spice="cinnamon"
+								></div>
+								<div
+									class="spice-jar"
+									data-spice="cloves"
+								></div>
+								<div class="sparkle" aria-hidden="true"></div>
+							</div>
+
+							<!-- Enhanced Quote Board -->
+							<div
+								class="quote-board"
+								aria-live="polite"
+								aria-label="Inspirational quotes"
+							>
+								<div class="quote active">
+									"Creativity is intelligence having fun" -
+									Albert Einstein
+								</div>
+								<div class="quote">
+									"Every great design begins with an even
+									better story" - Lorinda Mamo
+								</div>
+								<div class="quote">
+									"Innovation distinguishes between a leader
+									and a follower" - Steve Jobs
+								</div>
+								<div class="quote">
+									"चाय पीकर काम करना, यही तो है असली जिंदगी" -
+									Office Wisdom
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Pod 2: @digimad.me Creative Studio with Enhanced Interactions -->
+					<section
+						class="pod digimad-pod"
+						aria-labelledby="digimad-title"
+						role="region"
+					>
+						<header>
+							<h2 id="digimad-title" class="pod-title">
+								@digimad.me Creative Studio
+							</h2>
+							<div class="pod-subtitle">
+								Digital Art & Visual Storytelling
+							</div>
+						</header>
+						<div class="pod-content">
+							<div
+								class="film-strip-border"
+								aria-hidden="true"
+							></div>
+
+							<!-- Enhanced Flip Card Gallery -->
+							<div
+								class="flip-card-gallery"
+								role="group"
+								aria-label="Interactive art gallery"
+							>
+								<div
+									class="flip-card"
+									tabindex="0"
+									role="button"
+									aria-label="Digital art piece - click to reveal poem"
+								>
+									<div class="flip-card-inner">
+										<div class="flip-card-front">
+											<div class="fan-art">
+												Digital Canvas
+											</div>
+											<div class="art-preview"></div>
+										</div>
+										<div class="flip-card-back">
+											<div class="poem">
+												" stories untold."
+											</div>
+										</div>
+									</div>
+								</div>
+								<div
+									class="flip-card"
+									tabindex="0"
+									role="button"
+									aria-label="Creative vision - click to reveal poem"
+								>
+									<div class="flip-card-inner">
+										<div class="flip-card-front">
+											<div class="fan-art">
+												Creative Vision
+											</div>
+											<div
+												class="art-preview vision-art"
+											></div>
+										</div>
+										<div class="flip-card-back">
+											<div class="poem">
+												"flow like Water."
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Spotlight -->
+							<div class="spotlight" aria-hidden="true"></div>
+
+							<!-- Interactive Doodle Pad -->
+							<div
+								class="doodle-pad"
+								role="button"
+								tabindex="0"
+								aria-label="Interactive drawing pad"
+							>
+								<div class="pencil"></div>
+								<div class="scribble" aria-hidden="true"></div>
+								<div class="drawing-surface">
+									<div class="doodle-line line-1"></div>
+									<div class="doodle-line line-2"></div>
+									<div class="doodle-circle"></div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Pod 3: @mycrxn Tech Den with Enhanced Monitors -->
+					<section
+						class="pod mycrxn-pod"
+						aria-labelledby="mycrxn-title"
+						role="region"
+					>
+						<header>
+							<h2 id="mycrxn-title" class="pod-title">
+								@mycrxn Tech Den
+							</h2>
+							<div class="pod-subtitle">
+								Code, Debug, Deploy, Repeat
+							</div>
+						</header>
+						<div class="pod-content">
+							<!-- Enhanced Dual Monitors with Glow Effect -->
+							<div
+								class="dual-monitors"
+								role="group"
+								aria-label="Development workstation"
+							>
+								<div
+									class="monitor monitor-left"
+									role="button"
+									tabindex="0"
+									aria-label="Development monitor"
+								>
+									<div class="screen">
+										<div
+											class="screen-glow"
+											aria-hidden="true"
+										></div>
+										<code
+											class="typewriter"
+											aria-live="polite"
+										>
+											<span
+												class="typed-text"
+												aria-label="Code being typed"
+											></span>
+											<span
+												class="cursor"
+												aria-hidden="true"
+												>|</span
+											>
+										</code>
+									</div>
+									<div
+										class="sticky-note wiggle-note"
+										role="button"
+										tabindex="0"
+										aria-label="Sticky note: Debug Mode"
+									>
+										Debug Mode
+									</div>
+								</div>
+								<div
+									class="monitor monitor-right"
+									role="button"
+									tabindex="0"
+									aria-label="Server monitor"
+								>
+									<div class="screen">
+										<div
+											class="screen-glow"
+											aria-hidden="true"
+										></div>
+										<code
+											class="typewriter"
+											aria-live="polite"
+										>
+											<span
+												class="typed-text-2"
+												aria-label="Server status"
+											></span>
+											<span
+												class="cursor"
+												aria-hidden="true"
+												>|</span
+											>
+										</code>
+									</div>
+									<div
+										class="sticky-note wiggle-note"
+										role="button"
+										tabindex="0"
+										aria-label="Sticky note: Live Server"
+									>
+										Live Server
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Mechanical Keyboard -->
+							<div
+								class="mechanical-keyboard"
+								role="button"
+								tabindex="0"
+								aria-label="Mechanical keyboard with Hindi-English keys"
+							>
+								<div class="keyboard-row row-1">
+									<div class="key" data-key="क">क</div>
+									<div class="key" data-key="w">W</div>
+									<div class="key" data-key="e">E</div>
+									<div class="key" data-key="र">र</div>
+								</div>
+								<div class="keyboard-row row-2">
+									<div class="key" data-key="a">A</div>
+									<div class="key" data-key="स">स</div>
+									<div class="key" data-key="d">D</div>
+									<div class="key" data-key="f">F</div>
+								</div>
+								<div
+									class="keyboard-underglow"
+									aria-hidden="true"
+								></div>
+							</div>
+
+							<!-- Enhanced Headphones -->
+							<div
+								class="headphones"
+								aria-label="Premium headphones"
+							>
+								<div class="headphone-left"></div>
+								<div class="headphone-right"></div>
+								<div class="headband"></div>
+								<div class="music-notes" aria-hidden="true">
+									<div class="note note-1">♪</div>
+									<div class="note note-2">♫</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Pod 4: @cloudsecin Security Hub with Enhanced Shield -->
+					<section
+						class="pod cloudsecin-pod"
+						aria-labelledby="cloudsecin-title"
+						role="region"
+					>
+						<header>
+							<h2 id="cloudsecin-title" class="pod-title">
+								@cloudsecin Security Hub
+							</h2>
+							<div class="pod-subtitle">
+								Protecting Digital Assets 24/7
+							</div>
+						</header>
+						<div class="pod-content">
+							<!-- Enhanced Pulsing Shield -->
+							<div
+								class="shield-icon"
+								role="button"
+								tabindex="0"
+								aria-label="Security shield - click to activate"
+							>
+								<div class="shield-body pulsing-shield">
+									<div class="shield-inner"></div>
+									<div
+										class="shield-checkmark"
+										aria-hidden="true"
+									>
+										✓
+									</div>
+								</div>
+								<div class="shield-rings" aria-hidden="true">
+									<div class="ring ring-1"></div>
+									<div class="ring ring-2"></div>
+									<div class="ring ring-3"></div>
+								</div>
+							</div>
+
+							<!-- Enhanced Lock Pad -->
+							<div
+								class="lock-pad"
+								tabindex="0"
+								role="button"
+								aria-label="Security lock - click to unlock"
+							>
+								<div class="lock-shackle"></div>
+								<div class="lock-body">
+									<div class="lock-keyhole"></div>
+									<div
+										class="lock-indicator"
+										aria-live="polite"
+									>
+										SECURE
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Status Lights -->
+							<div
+								class="status-lights"
+								role="group"
+								aria-label="Security status indicators"
+							>
+								<div
+									class="status-light light-1"
+									aria-label="Firewall active"
+								></div>
+								<div
+									class="status-light light-2"
+									aria-label="Encryption enabled"
+								></div>
+								<div
+									class="status-light light-3"
+									aria-label="Monitoring active"
+								></div>
+							</div>
+
+							<!-- Enhanced Security Tooltip -->
+							<div class="security-tooltip" aria-live="polite">
+								<div class="tooltip-content">
+									All systems secure • Threat level: LOW
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Enhanced Shared Lounge with Cultural Elements -->
+					<section
+						class="shared-lounge"
+						aria-labelledby="lounge-title"
+						role="region"
+					>
+						<header>
+							<h2 id="lounge-title" class="lounge-title">
+								Shared Lounge & Cultural Hub
+							</h2>
+							<div class="lounge-subtitle">
+								Where Teams Connect & Culture Thrives
+							</div>
+						</header>
+						<div class="lounge-content">
+							<!-- Central Adda Area (mycrxn Style) -->
+							<div
+								class="central-adda"
+								role="group"
+								aria-label="Central gathering area"
+							>
+								<div class="circular-sofa">
+									<div class="sofa-segment segment-1"></div>
+									<div class="sofa-segment segment-2"></div>
+									<div class="sofa-segment segment-3"></div>
+									<div class="sofa-segment segment-4"></div>
+									<div class="center-table">
+										<div class="table-surface"></div>
+										<div class="chai-service">
+											<div class="chai-kettle"></div>
+											<div class="cups-tray"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Pantry with Traditional Elements -->
+							<div
+								class="pantry-area"
+								role="group"
+								aria-label="Office pantry and kitchen"
+							>
+								<h3 class="area-title">
+									Pantry & Chai Station
+								</h3>
+								<div class="pantry-counter">
+									<div
+										class="microwave"
+										role="button"
+										tabindex="0"
+										aria-label="Microwave oven"
+									></div>
+									<div
+										class="coffee-machine"
+										role="button"
+										tabindex="0"
+										aria-label="Coffee machine"
+									></div>
+									<div
+										class="traditional-stove"
+										role="button"
+										tabindex="0"
+										aria-label="Traditional chai stove"
+									>
+										<div class="stove-burner"></div>
+										<div class="chai-pot-small"></div>
+									</div>
+									<div class="fruit-bowl">
+										<div class="fruit apple"></div>
+										<div class="fruit banana"></div>
+										<div class="fruit orange"></div>
+									</div>
+								</div>
+								<div class="pantry-shelves">
+									<div class="shelf shelf-1">
+										<div
+											class="jar jar-1"
+											data-content="Masala"
+										></div>
+										<div
+											class="jar jar-2"
+											data-content="Sugar"
+										></div>
+										<div
+											class="jar jar-3"
+											data-content="Tea"
+										></div>
+									</div>
+									<div class="shelf shelf-2">
+										<div
+											class="snack-box box-1"
+											data-content="Biscuits"
+										></div>
+										<div
+											class="snack-box box-2"
+											data-content="Namkeen"
+										></div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Water Cooler Gossip Corner -->
+							<div
+								class="water-cooler-area"
+								role="group"
+								aria-label="Water cooler and discussion area"
+							>
+								<h3 class="area-title">Office Adda Corner</h3>
+								<div
+									class="water-cooler"
+									role="button"
+									tabindex="0"
+									aria-label="Water cooler"
+								>
+									<div class="cooler-body"></div>
+									<div class="water-bottle"></div>
+									<div class="cooler-tap"></div>
+								</div>
+								<div
+									class="gossip-bubbles"
+									aria-live="polite"
+									aria-label="Office conversations"
+								>
+									<div class="gossip-bubble bubble-1">
+										<span class="gossip-text"
+											>"Did you see the new
+											project?"</span
+										>
+									</div>
+									<div class="gossip-bubble bubble-2">
+										<span class="gossip-text"
+											>"Chai break in 5 minutes!"</span
+										>
+									</div>
+									<div class="gossip-bubble bubble-3">
+										<span class="gossip-text"
+											>"Weekend plans kya hai?"</span
+										>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Entertainment Wall -->
+							<div
+								class="entertainment-wall"
+								role="group"
+								aria-label="Entertainment and news area"
+							>
+								<h3 class="area-title">Entertainment Zone</h3>
+								<div
+									class="wall-mount-tv tv-1"
+									role="button"
+									tabindex="0"
+									aria-label="News TV"
+								>
+									<div class="tv-screen">
+										<div class="tv-content">
+											<div class="news-ticker">
+												Breaking: Tech Innovation Awards
+												2024
+											</div>
+										</div>
+									</div>
+									<div class="tv-stand"></div>
+								</div>
+								<div
+									class="wall-mount-tv tv-2"
+									role="button"
+									tabindex="0"
+									aria-label="Sports TV"
+								>
+									<div class="tv-screen">
+										<div class="tv-content">
+											<div class="sports-score">
+												Cricket Live • IND vs AUS
+											</div>
+										</div>
+									</div>
+									<div class="tv-stand"></div>
+								</div>
+							</div>
+
+							<!-- Enhanced Conference Room -->
+							<div
+								class="conference-room"
+								role="group"
+								aria-label="Conference and meeting room"
+							>
+								<h3 class="area-title">Meeting Room</h3>
+								<div class="conference-table">
+									<div class="table-top"></div>
+									<div class="conference-chairs-row">
+										<div
+											class="conf-chair conf-chair-1"
+										></div>
+										<div
+											class="conf-chair conf-chair-2"
+										></div>
+										<div
+											class="conf-chair conf-chair-3"
+										></div>
+										<div
+											class="conf-chair conf-chair-4"
+										></div>
+									</div>
+								</div>
+								<div
+									class="projector-screen"
+									role="button"
+									tabindex="0"
+									aria-label="Presentation screen"
+								>
+									<div class="screen-surface">
+										<div class="presentation-slide">
+											<div class="slide-title">
+												Q4 Growth Strategy
+											</div>
+											<div class="slide-chart"></div>
+											<div class="slide-footer">
+												KalaKraft Digital Den
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Gym Area -->
+							<div
+								class="gym-area"
+								role="group"
+								aria-label="Fitness and wellness area"
+							>
+								<h3 class="area-title">Wellness Zone</h3>
+								<div
+									class="exercise-bike"
+									role="button"
+									tabindex="0"
+									aria-label="Exercise bike"
+								>
+									<div class="bike-frame"></div>
+									<div class="bike-wheel wheel-front"></div>
+									<div class="bike-wheel wheel-back"></div>
+									<div class="bike-seat"></div>
+									<div class="bike-handles"></div>
+									<div class="bike-display">
+										<div class="display-text">5.2 KM</div>
+									</div>
+								</div>
+								<div
+									class="yoga-mat"
+									role="button"
+									tabindex="0"
+									aria-label="Yoga mat"
+								></div>
+								<div class="dumbbells">
+									<div
+										class="dumbbell dumbbell-1"
+										role="button"
+										tabindex="0"
+										aria-label="5kg dumbbell"
+									></div>
+									<div
+										class="dumbbell dumbbell-2"
+										role="button"
+										tabindex="0"
+										aria-label="10kg dumbbell"
+									></div>
+								</div>
+							</div>
+
+							<!-- Enhanced Bollywood Poster Wall -->
+							<div
+								class="creative-walls"
+								role="group"
+								aria-label="Bollywood movie poster collection"
+							>
+								<h3 class="area-title">
+									Bollywood Cinema Wall
+								</h3>
+								<div class="poster-wall wall-left">
+									<div
+										class="movie-poster poster-1"
+										role="button"
+										tabindex="0"
+										aria-label="3 Idiots movie poster"
+									>
+										<div class="poster-frame">
+											<div class="poster-title">
+												3 IDIOTS
+											</div>
+											<div
+												class="poster-image bollywood-classic"
+											></div>
+											<div class="poster-subtitle">
+												Aamir Khan • Comedy Drama
+											</div>
+											<div class="poster-rating">
+												★★★★★
+											</div>
+										</div>
+									</div>
+									<div
+										class="movie-poster poster-2"
+										role="button"
+										tabindex="0"
+										aria-label="Dangal movie poster"
+									>
+										<div class="poster-frame">
+											<div class="poster-title">
+												DANGAL
+											</div>
+											<div
+												class="poster-image sports-drama"
+											></div>
+											<div class="poster-subtitle">
+												Wrestling • Inspiration
+											</div>
+											<div class="poster-rating">
+												★★★★★
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="poster-wall wall-right">
+									<div
+										class="movie-poster poster-3"
+										role="button"
+										tabindex="0"
+										aria-label="Zindagi Na Milegi Dobara movie poster"
+									>
+										<div class="poster-frame">
+											<div class="poster-title">
+												ZINDAGI NA MILEGI DOBARA
+											</div>
+											<div
+												class="poster-image adventure-film"
+											></div>
+											<div class="poster-subtitle">
+												Friendship • Adventure
+											</div>
+											<div class="poster-rating">
+												★★★★☆
+											</div>
+										</div>
+									</div>
+									<div
+										class="movie-poster poster-4"
+										role="button"
+										tabindex="0"
+										aria-label="Queen movie poster"
+									>
+										<div class="poster-frame">
+											<div class="poster-title">
+												QUEEN
+											</div>
+											<div
+												class="poster-image empowerment-film"
+											></div>
+											<div class="poster-subtitle">
+												Kangana • Empowerment
+											</div>
+											<div class="poster-rating">
+												★★★★★
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced ITV Awards Display -->
+							<div
+								class="awards-display"
+								role="group"
+								aria-label="ITV awards and achievements showcase"
+							>
+								<h3 class="area-title">Awards & Recognition</h3>
+								<div class="awards-cabinet">
+									<div class="cabinet-top">
+										<div
+											class="award-trophy trophy-1"
+											role="button"
+											tabindex="0"
+											aria-label="Best Drama Series 2023"
+										>
+											<div class="trophy-cup"></div>
+											<div class="trophy-base"></div>
+											<div class="award-label">
+												Best Drama 2023
+											</div>
+											<div
+												class="trophy-glow"
+												aria-hidden="true"
+											></div>
+										</div>
+										<div
+											class="award-trophy trophy-2"
+											role="button"
+											tabindex="0"
+											aria-label="Excellence in Broadcasting Award"
+										>
+											<div class="trophy-cup"></div>
+											<div class="trophy-base"></div>
+											<div class="award-label">
+												Excellence Award
+											</div>
+											<div
+												class="trophy-glow"
+												aria-hidden="true"
+											></div>
+										</div>
+									</div>
+									<div class="cabinet-bottom">
+										<div
+											class="award-certificate cert-1"
+											role="button"
+											tabindex="0"
+											aria-label="ITV Awards 2024 Certificate"
+										>
+											<div class="cert-frame">
+												<div class="cert-title">
+													ITV AWARDS
+												</div>
+												<div class="cert-year">
+													2024
+												</div>
+												<div class="cert-category">
+													Digital Innovation
+												</div>
+											</div>
+										</div>
+										<div
+											class="award-certificate cert-2"
+											role="button"
+											tabindex="0"
+											aria-label="Recognition Certificate 2023"
+										>
+											<div class="cert-frame">
+												<div class="cert-title">
+													RECOGNITION
+												</div>
+												<div class="cert-year">
+													2023
+												</div>
+												<div class="cert-category">
+													Creative Excellence
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Traditional Office Plant Corner -->
+							<div
+								class="office-plants"
+								role="group"
+								aria-label="Office plants and greenery"
+							>
+								<h3 class="area-title">Green Corner</h3>
+								<div class="plant-collection">
+									<div
+										class="office-plant money-plant"
+										role="button"
+										tabindex="0"
+										aria-label="Money plant in brass pot"
+									>
+										<div class="brass-pot"></div>
+										<div class="plant-leaves"></div>
+										<div class="happiness-meter">
+											<div class="meter-fill"></div>
+										</div>
+									</div>
+									<div
+										class="office-plant tulsi-plant"
+										role="button"
+										tabindex="0"
+										aria-label="Tulsi plant"
+									>
+										<div class="clay-pot"></div>
+										<div class="tulsi-leaves"></div>
+									</div>
+									<div
+										class="office-plant bamboo-plant"
+										role="button"
+										tabindex="0"
+										aria-label="Lucky bamboo"
+									>
+										<div class="glass-vase"></div>
+										<div class="bamboo-stalks"></div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Enhanced Bookshelf -->
+							<div
+								class="bookshelf"
+								role="group"
+								aria-label="Office library and books"
+							>
+								<h3 class="area-title">Knowledge Corner</h3>
+								<div class="book-collection">
+									<div
+										class="book book-1"
+										role="button"
+										tabindex="0"
+										aria-label="Design Thinking book"
+									></div>
+									<div
+										class="book book-2"
+										role="button"
+										tabindex="0"
+										aria-label="JavaScript Guide book"
+									></div>
+									<div
+										class="book book-3"
+										role="button"
+										tabindex="0"
+										aria-label="Security Handbook book"
+									></div>
+									<div
+										class="book book-4"
+										role="button"
+										tabindex="0"
+										aria-label="Creative Writing book"
+									></div>
+									<div
+										class="book book-5"
+										role="button"
+										tabindex="0"
+										aria-label="Hindi Literature book"
+									></div>
+								</div>
+							</div>
+
+							<!-- Enhanced Confetti Celebration Spot -->
+							<div class="confetti-spot" aria-hidden="true">
+								<div class="confetti"></div>
+								<div
+									class="celebration-text"
+									aria-live="polite"
+								>
+									Celebrating Success!
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				<!-- Enhanced Workplace Ritual Overlays with Confetti -->
+				<div
+					class="ritual-banners"
+					aria-live="polite"
+					aria-label="Wellness reminders"
+				>
+					<div class="ritual-banner stretch-banner">
+						<div class="banner-icon" aria-hidden="true">🧘</div>
+						<div class="banner-content">
+							<span class="banner-title">Wellness Break</span>
+							<span class="banner-text"
+								>Time to stretch & breathe deeply</span
+							>
+						</div>
+						<div class="banner-confetti" aria-hidden="true"></div>
+					</div>
+					<div class="ritual-banner chai-banner">
+						<div class="banner-icon" aria-hidden="true">☕</div>
+						<div class="banner-content">
+							<span class="banner-title">Chai Time</span>
+							<span class="banner-text"
+								>चाय का समय - Team bonding moment</span
+							>
+						</div>
+						<div class="banner-confetti" aria-hidden="true"></div>
+					</div>
+					<div class="ritual-banner poetry-banner">
+						<div class="banner-icon" aria-hidden="true">📝</div>
+						<div class="banner-content">
+							<span class="banner-title">Creative Pause</span>
+							<span class="banner-text"
+								>Let your imagination flow freely</span
+							>
+						</div>
+						<div class="banner-confetti" aria-hidden="true"></div>
+					</div>
+					<div class="ritual-banner celebration-banner">
+						<div class="banner-icon" aria-hidden="true">🎉</div>
+						<div class="banner-content">
+							<span class="banner-title"
+								>Achievement Unlocked</span
+							>
+							<span class="banner-text"
+								>Celebrating team success!</span
+							>
+						</div>
+						<div class="banner-confetti" aria-hidden="true"></div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Screen reader only content with detailed instructions -->
+		<div class="sr-only">
+			<h2>Accessibility Instructions</h2>
+			<p>
+				KalaKraft Digital Den is a fully interactive CSS-only workspace
+				featuring four creative pods and a shared cultural lounge area.
+			</p>
+			<p>
+				Navigation: Use Tab key to move between interactive elements,
+				Enter or Space to activate buttons and interactive areas.
+			</p>
+			<p>
+				The workspace includes: Inspiration Pod with chai brewing
+				station, Creative Studio with flip cards, Tech Den with glowing
+				monitors, Security Hub with pulsing shields, and a Shared Lounge
+				with cultural elements.
+			</p>
+			<p>
+				Live regions will announce dynamic content changes. All
+				animations respect reduced motion preferences.
+			</p>
+		</div>
+
+		<!-- Usage Instructions (Hidden by default, can be shown via CSS) -->
+		<div class="usage-instructions" id="instructions" aria-hidden="true">
+			<div class="instructions-content">
+				<h2>How to Use KalaKraft Digital Den</h2>
+				<div class="instruction-section">
+					<h3>Interactive Elements</h3>
+					<ul>
+						<li>
+							<strong>Chai Station:</strong> Click to start
+							brewing animation
+						</li>
+						<li>
+							<strong>Flip Cards:</strong> Hover or click to
+							reveal hidden poems
+						</li>
+						<li>
+							<strong>Monitors:</strong> Hover for glow effects
+							and typewriter animations
+						</li>
+						<li>
+							<strong>Sticky Notes:</strong> Click to make them
+							wiggle
+						</li>
+						<li>
+							<strong>Security Shield:</strong> Click to activate
+							pulsing protection
+						</li>
+						<li>
+							<strong>Movie Posters:</strong> Hover for enhanced
+							details
+						</li>
+						<li>
+							<strong>Awards:</strong> Click trophies for glow
+							effects
+						</li>
+					</ul>
+				</div>
+				<div class="instruction-section">
+					<h3>Accessibility Features</h3>
+					<ul>
+						<li>Full keyboard navigation support</li>
+						<li>Screen reader compatible with ARIA labels</li>
+						<li>
+							Reduced motion support for users with vestibular
+							disorders
+						</li>
+						<li>High contrast mode compatibility</li>
+						<li>Live regions for dynamic content announcements</li>
+					</ul>
+				</div>
+				<div class="instruction-section">
+					<h3>Cultural Elements</h3>
+					<ul>
+						<li>
+							Traditional chai brewing station with brass elements
+						</li>
+						<li>
+							Hindi-English mixed content reflecting office
+							culture
+						</li>
+						<li>Bollywood movie poster collection</li>
+						<li>
+							Office gossip corner with water cooler conversations
+						</li>
+						<li>
+							Traditional plants: Money plant, Tulsi, Lucky bamboo
+						</li>
+					</ul>
+				</div>
+				<button
+					class="close-instructions"
+					onclick="document.getElementById('instructions').style.display='none'"
+				>
+					Close Instructions
+				</button>
+			</div>
+		</div>
+	</body>
+</html>
