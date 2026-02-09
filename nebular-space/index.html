@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS SAA-C03 Flashcards | Exam Prep</title>
+    <meta name="description" content="Master AWS Certified Solutions Architect - Associate exam with scenario-based flashcards covering 131 AWS services.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">☁️</span>
+                    <h1>AWS SAA-C03</h1>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <span></span>
+                </button>
+            </div>
+            
+            <div class="progress-overview">
+                <div class="progress-ring-container">
+                    <svg class="progress-ring" viewBox="0 0 100 100">
+                        <circle class="progress-ring-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="progress-ring-fill" cx="50" cy="50" r="45" id="progressRing"></circle>
+                    </svg>
+                    <div class="progress-percent" id="progressPercent">0%</div>
+                </div>
+                <div class="progress-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="masteredCount">0</span>
+                        <span class="stat-label">Mastered</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="reviewCount">0</span>
+                        <span class="stat-label">Review</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="newCount">0</span>
+                        <span class="stat-label">New</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="category-nav">
+                <div class="nav-section-title">Categories</div>
+                <ul class="category-list" id="categoryList">
+                    <li class="category-item active" data-category="all">
+                        <span class="category-icon">📚</span>
+                        <span class="category-name">All Services</span>
+                        <span class="category-count" id="allCount">0</span>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="reset-btn" id="resetProgress">
+                    <span>🔄</span> Reset Progress
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="current-category">
+                        <span id="currentCategoryIcon">📚</span>
+                        <h2 id="currentCategoryName">All Services</h2>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="card-counter">
+                        <span id="currentCardNum">1</span>
+                        <span class="separator">/</span>
+                        <span id="totalCards">0</span>
+                    </div>
+                    <div class="view-controls">
+                        <button class="control-btn" id="shuffleBtn" title="Shuffle cards (S)">
+                            <span>🔀</span>
+                        </button>
+                        <button class="control-btn" id="filterBtn" title="Filter by status">
+                            <span>🎯</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filter Dropdown -->
+            <div class="filter-dropdown" id="filterDropdown">
+                <button class="filter-option active" data-filter="all">All Cards</button>
+                <button class="filter-option" data-filter="new">New Only</button>
+                <button class="filter-option" data-filter="review">Needs Review</button>
+                <button class="filter-option" data-filter="mastered">Mastered</button>
+            </div>
+
+            <!-- Flashcard Area -->
+            <div class="flashcard-container">
+                <button class="nav-arrow nav-prev" id="prevBtn" aria-label="Previous card">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+
+                <div class="flashcard-wrapper">
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div class="card-service-tag" id="serviceTag">Amazon S3</div>
+                                <div class="card-content">
+                                    <div class="scenario-label">Scenario</div>
+                                    <p class="scenario-text" id="scenarioText">Loading flashcards...</p>
+                                </div>
+                                <div class="card-hint">
+                                    <span>Click or press Space to reveal answer</span>
+                                </div>
+                            </div>
+                            <div class="flashcard-back">
+                                <div class="card-service-tag" id="serviceTagBack">Amazon S3</div>
+                                <div class="card-content">
+                                    <div class="answer-label">Answer</div>
+                                    <h3 class="answer-title" id="answerTitle">Service Name</h3>
+                                    <div class="answer-details" id="answerDetails">
+                                        <p>Key points will appear here...</p>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn needs-review" id="markReviewBtn" title="Mark for review">
+                                        <span>🔄</span> Review
+                                    </button>
+                                    <button class="action-btn mastered" id="markMasteredBtn" title="Mark as mastered">
+                                        <span>✅</span> Mastered
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="nav-arrow nav-next" id="nextBtn" aria-label="Next card">
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+                </button>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="shortcuts-bar">
+                <div class="shortcut">
+                    <kbd>Space</kbd>
+                    <span>Flip</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>←</kbd><kbd>→</kbd>
+                    <span>Navigate</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>S</kbd>
+                    <span>Shuffle</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>M</kbd>
+                    <span>Master</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>R</kbd>
+                    <span>Review</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/analytics.js"></script>
+    <script src="data/application-integration.js"></script>
+    <script src="data/cost-management.js"></script>
+    <script src="data/compute.js"></script>
+    <script src="data/containers.js"></script>
+    <script src="data/database.js"></script>
+    <script src="data/developer-tools.js"></script>
+    <script src="data/frontend-mobile.js"></script>
+    <script src="data/machine-learning.js"></script>
+    <script src="data/management-governance.js"></script>
+    <script src="data/media-services.js"></script>
+    <script src="data/migration-transfer.js"></script>
+    <script src="data/networking.js"></script>
+    <script src="data/security.js"></script>
+    <script src="data/serverless.js"></script>
+    <script src="data/storage.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
